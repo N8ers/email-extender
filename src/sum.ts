@@ -1,5 +1,6 @@
-function sum() {
+export function sum(a: number) {
+  console.log("a ", a)
   return 1
 }
 
-module.exports = { sum }
+sum(5)

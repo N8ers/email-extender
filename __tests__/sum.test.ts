@@ -1,4 +1,4 @@
-const { sum } = require("../src/sum")
+import { sum } from "../src/sum"
 
 describe("sum", () => {
   test("should be a function", () => {
@@ -6,7 +6,7 @@ describe("sum", () => {
   })
 
   test("should return 1", () => {
-    const result = sum()
+    const result = sum(1)
     expect(result).toEqual(1)
   })
 })
