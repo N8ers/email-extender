@@ -39,10 +39,12 @@ describe("getValueToAppend()", () => {
     expect(typeof getValueToAppend()).toEqual("string")
   })
 
-  test("should return the Tsuki's found day in the format 'YYYY.MM.DD.HH.MM.SS'", () => {
+  test("should date in the format 'YYYY.MM.DD.HH.MM.SS'", () => {
     const regex =
-      /^\d{4}\.(0[1-9]|1[012])\.(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|[12][0-9]|3[01])$/gm
-    expect("2020.02.25.25.25").toMatch(regex)
+      /^\d{4}\.(0[1-9]|1[012])\.(0[1-9]|[12][0-9]|3[01])\.([0-5]?\d)\.([0-5]?\d)\.([0-5]?\d)$/gm
+    jest.useFakeTimers().setSystemTime(new Date(2020, 9, 31))
+
+    expect(getValueToAppend()).toMatch(regex)
   })
 
   test("should return the date with zero infront of 1 digit months", () => {
