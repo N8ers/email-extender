@@ -32,9 +32,9 @@ export function appendEmailAddress(email: string): string {
     throw new Error("Email address has incorrect number of '@' symbols.")
   }
 
-  const valueToAppend = "+1"
+  const valueToAppend = getValueToAppend()
   const appendedEmail: string =
-    slicedEmail[0] + valueToAppend + "@" + slicedEmail[1]
+    slicedEmail[0] + "+" + valueToAppend + "@" + slicedEmail[1]
 
   return appendedEmail
 }

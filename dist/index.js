@@ -30,8 +30,8 @@ function appendEmailAddress(email) {
     if (slicedEmail.length !== 2) {
         throw new Error("Email address has incorrect number of '@' symbols.");
     }
-    const valueToAppend = "+1";
-    const appendedEmail = slicedEmail[0] + valueToAppend + "@" + slicedEmail[1];
+    const valueToAppend = getValueToAppend();
+    const appendedEmail = slicedEmail[0] + "+" + valueToAppend + "@" + slicedEmail[1];
     return appendedEmail;
 }
 exports.appendEmailAddress = appendEmailAddress;

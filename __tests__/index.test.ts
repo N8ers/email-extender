@@ -6,7 +6,6 @@ import {
 
 describe("appendEmailAddress()", () => {
   const testEmail = "tsuki@cat.com"
-  const appendedTestEmail = "tsuki+1@cat.com"
   const incorrectAtSignError =
     "Email address has incorrect number of '@' symbols."
   test("should be a function", () => {
@@ -24,9 +23,11 @@ describe("appendEmailAddress()", () => {
   })
 
   test("should return email with it's appendion", () => {
-    // we will need a mock here soon
+    jest.useFakeTimers().setSystemTime(new Date(2020, 9, 31))
+
     const result = appendEmailAddress(testEmail)
-    expect(result).toEqual(appendedTestEmail)
+
+    expect(result).toEqual("tsuki+2020.10.31.00.00.00@cat.com")
   })
 })
 
