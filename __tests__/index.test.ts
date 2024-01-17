@@ -48,34 +48,36 @@ describe("getValueToAppend()", () => {
     expect(getValueToAppend()).toMatch(regex)
   })
 
-  test("should return the date with zero infront of 1 digit months", () => {
-    jest.useFakeTimers().setSystemTime(new Date(2020, 1))
+  test.each([
+    {
+      testName: "zero infront of 1 digit months",
+      dateToSet: new Date(2020, 1),
+      expected: "2020.02.01.00.00.00",
+    },
+    {
+      testName: "zero infront of 1 digit days",
+      dateToSet: new Date(2020, 1, 2),
+      expected: "2020.02.02.00.00.00",
+    },
+    {
+      testName: "zero infront of 1 digit hour",
+      dateToSet: new Date(2020, 1, 2, 6),
+      expected: "2020.02.02.06.00.00",
+    },
+    {
+      testName: "zero infront of 1 digit minute",
+      dateToSet: new Date(2020, 1, 2, 6, 4),
+      expected: "2020.02.02.06.04.00",
+    },
+    {
+      testName: "zero infront of 1 digit minute",
+      dateToSet: new Date(2020, 1, 2, 6, 4, 7),
+      expected: "2020.02.02.06.04.07",
+    },
+  ])("should return the date with $testName", ({ dateToSet, expected }) => {
+    jest.useFakeTimers().setSystemTime(new Date(dateToSet))
 
-    expect(getValueToAppend()).toEqual("2020.02.01.00.00.00")
-  })
-
-  test("should return the date with zero infront of 1 digit days", () => {
-    jest.useFakeTimers().setSystemTime(new Date(2020, 1, 2))
-
-    expect(getValueToAppend()).toEqual("2020.02.02.00.00.00")
-  })
-
-  test("should return the date with zero infront of 1 digit hour", () => {
-    jest.useFakeTimers().setSystemTime(new Date(2020, 1, 2, 6))
-
-    expect(getValueToAppend()).toEqual("2020.02.02.06.00.00")
-  })
-
-  test("should return the date with zero infront of 1 digit minute", () => {
-    jest.useFakeTimers().setSystemTime(new Date(2020, 1, 2, 6, 4))
-
-    expect(getValueToAppend()).toEqual("2020.02.02.06.04.00")
-  })
-
-  test("should return the date with zero infront of 1 digit seconds", () => {
-    jest.useFakeTimers().setSystemTime(new Date(2020, 1, 2, 6, 4, 7))
-
-    expect(getValueToAppend()).toEqual("2020.02.02.06.04.07")
+    expect(getValueToAppend()).toEqual(expected)
   })
 })
 
